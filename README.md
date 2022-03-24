@@ -6,4 +6,7 @@ Nie możesz również dystrybutować/sprzedawać zmodyfikowanego lub czystego sy
 
 
 
-System NIE podjebany z HexaOS (no systemów w c# nie można robić?)
+HexaOS: Ten system nie jest częścią systemu HexaOS ani żadną jego edycją/dystrybucją, prosimy o nie wiązanie go z moim systemem!
+
+Copyright ©️ GHJ-EU.ML 2022. All rights reserved
+Project owned by Werokowy, and GHJ™️ Group
