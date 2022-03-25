@@ -797,6 +797,36 @@ namespace workplease
                     }
                     return;
                 }
+                 if(input.StartsWith("remuser"))
+                {
+                    Console.WriteLine("Narzedzie usuwania uzytkownika v1.0:");
+                
+                    Console.WriteLine(" ");
+                    Console.Write("Nazwa uzytkownika: ");
+                    var usr = Console.ReadLine();
+                    Console.Write("Haslo uzytkownika: ");
+                    var pass = Console.ReadLine();
+                    
+                    if(Directory.Exists("0:\\OS\\Users\\"+usr))
+                    {
+                        try
+                        {
+                            LoginSystem.remUser(usr, pass);
+                            Console.WriteLine("Pomyslnie usunieto uzytkownika z systemu!");
+                            return;
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Bledne haslo!");
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Taki uzytkownik nie istnieje!");
+                        return;
+                    }
+                }
                 if (input.StartsWith("adduser"))
                 {
                     Console.WriteLine("Narzedzie dodawania nowego uzytkownika v1.0:");
