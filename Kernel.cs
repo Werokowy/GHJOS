@@ -797,6 +797,30 @@ namespace workplease
                     }
                     return;
                 }
+                if (input.StartsWith("adduser"))
+                {
+                    Console.WriteLine("Narzedzie dodawania nowego uzytkownika v1.0:");
+                    raks1:
+                    Console.WriteLine(" ");
+                    Console.Write("Nazwa uzytkownika: ");
+                    var usr = Console.ReadLine();
+                    Console.Write("Haslo: ");
+                    var pass = Console.ReadLine();
+                    Console.Write("Powtorz haslo: ");
+                    var pass1 = Console.ReadLine();
+                    if(pass==pass1)
+                    {
+                        LoginSystem.addUser(usr, pass);
+                        Console.WriteLine("Pomyslnie dodano nowego uzytkownika!");
+                        return;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Hasla nie sa takie same!");
+                        goto raks1;
+                    }
+
+                }
                 if (input.StartsWith("overwritte ") || input.StartsWith("edit "))
                 {
                     string filename;
