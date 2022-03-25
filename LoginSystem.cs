@@ -16,6 +16,13 @@ namespace workplease
 
             Directory.CreateDirectory(@"0:\OS\Users\" + user + @"\pass" + pass);
         }
+         public static void remUser(string user,string pass)
+        {
+            Directory.Delete(@"0:\OS\Users\" + user + @"\pass" + pass);
+            Directory.Delete(@"0:\OS\Users\" + user + @"\");
+
+            
+        }
         public static void registerMachineName()
         {
            if(!Directory.Exists(@"0:\OS\MachineInfo\"))
