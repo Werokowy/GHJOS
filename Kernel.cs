@@ -10,7 +10,7 @@ namespace workplease
     public class Kernel : Sys.Kernel
     {
         public static string osname = "GHJOS";
-        public static string osver = "Beta 2.9";
+        public static string osver = "Origin 3.3";
         public static string username = "Test";
         public static string pathvar = @"0:\";
         public static string[] shellinput;
