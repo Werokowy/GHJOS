@@ -74,6 +74,9 @@ namespace workplease
                     }
                     else
                     {
+                        /*
+                        Console.WriteLine("Niepoprawne haslo!");
+                        return; */
                         System.Threading.Thread.Sleep(2000);
                         Console.WriteLine("Haslo jest niepoprawne!");
                         Console.WriteLine(" ");
@@ -82,11 +85,14 @@ namespace workplease
                     }
                 }
                 else
-                {
+                {/*
+                    Console.WriteLine("Nie znaleziono uzytkownika!");
+                return; */
                     System.Threading.Thread.Sleep(2000);
                     
                     Console.WriteLine("Login jest niepoprawny!");
                     Console.WriteLine(" ");
+                    
                     goto morgo;
                     return;
                 }
