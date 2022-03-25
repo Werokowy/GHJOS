@@ -9,6 +9,13 @@ namespace workplease
 {
     class LoginSystem
     {
+        public static void addUser(string user,string pass)
+        {
+           
+            Directory.CreateDirectory(@"0:\OS\Users\" + user + @"\");
+
+            Directory.CreateDirectory(@"0:\OS\Users\" + user + @"\pass" + pass);
+        }
         public static void registerMachineName()
         {
            if(!Directory.Exists(@"0:\OS\MachineInfo\"))
