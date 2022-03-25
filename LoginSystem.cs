@@ -57,6 +57,7 @@ namespace workplease
             if (File.Exists(@"0:\OS\Users\registry\defined.reg"))
             {
                 Console.WriteLine("Prosze sie zalogowac uzywajac loginu i hasla...");
+                morgo:
                 Console.Write("User > ");
                 var input = Console.ReadLine();
                 string user = input;
@@ -73,13 +74,20 @@ namespace workplease
                     }
                     else
                     {
-                        Console.WriteLine("Niepoprawne haslo!");
-                        return;
+                        System.Threading.Thread.Sleep(2000);
+                        Console.WriteLine("Haslo jest niepoprawne!");
+                        Console.WriteLine(" ");
+                        goto morgo;
+                       
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Nie znaleziono uzytkownika!");
+                    System.Threading.Thread.Sleep(2000);
+                    
+                    Console.WriteLine("Login jest niepoprawny!");
+                    Console.WriteLine(" ");
+                    goto morgo;
                     return;
                 }
             }
