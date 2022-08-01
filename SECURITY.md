@@ -6,9 +6,9 @@ Some versions are no longer supported by us and bugs reported on them will be cl
 
 | Version | Supported |
 | Beta 2.9x | :x: |
-| < Origin 3.3 | :x: |
+| < Origin 3.5 | :x: |
 | ------- | ------------------ |
-| Origin 3.3 | :white_check_mark: |
+| Origin 3.5 LTS | :white_check_mark: |
 | Lalest | :white_check_mark: |
 
 
