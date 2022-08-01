@@ -10,7 +10,7 @@ namespace workplease
     public class Kernel : Sys.Kernel
     {
         public static string osname = "GHJOS";
-        public static string osver = "Origin 3.3";
+        public static string osver = "Origin 3.5";
         public static string username = "Test";
         public static string pathvar = @"0:\";
         public static string[] shellinput;
@@ -23,6 +23,7 @@ namespace workplease
         public static int pid1;
         public static int pid2;
         public static int pid3;
+
         protected override void BeforeRun()
         {
             var fs = new Sys.FileSystem.CosmosVFS();
@@ -64,11 +65,191 @@ namespace workplease
             {
                 OSApi.BSOD("DIRECTORY_NOT_FOUND_EXCEPTION", "0x020");
             }
+            try
+            {
+                if (!Directory.Exists(@"0:\OS\"))
+                {
+                    Directory.CreateDirectory(@"0:\OS\");
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Siema! Widze ze probujesz uruchomic GHJOS");
+                Console.WriteLine("Jednak nie uruchomiles go z odpowiednim dyskiem!");
+                Console.WriteLine("Uzyj dysku z https://github.com/Werokowy/GHJOS (sekcja README)\nDysk zamontuj na IDE. Zycze  milej zabawy!");
+                Console.ReadKey();
+                Sys.Power.Reboot();
+            }
+
+            try
+            {
+                if (!Directory.Exists(@"0:\OS\"))
+                {
+                }
+                Console.WriteLine("Worked");
+            }
+            catch
+            {
+                Console.WriteLine("if tez nie dziala");
+            }
+            if (!File.Exists(@"0:\OS\installed.reg"))
+            {
+                goto intro;
+            intro:
+                Console.WriteLine("GHJOS Operating System Setup v1.0");
+                Console.WriteLine(" ");
+                Thread.Sleep(3000);
+                goto info;
+            info:
+                Console.WriteLine("Before we install the system, we need to set some information...");
+                goto step1;
+            step1:
+                Console.WriteLine("Jesli jestes davinci, nie musisz cenzurowac tego klucza. i tak system jest open na github");
+                Console.WriteLine("Please enter now product key:");
+
+                Console.Write("Product key: ");
+                var key = Console.ReadLine();
+                if (key == "ROJAK261LOK")
+                {
+                    goto step2;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid product key!");
+                    goto step1;
+                }
+            step2:
+                Console.WriteLine("OK, product activated. Now select your country!");
+                Console.Write("Country: ");
+                var country = Console.ReadLine();
+                Console.WriteLine("Summary:");
+                Console.WriteLine("Product key - OK");
+                Console.WriteLine("Country - " + country);
+                goto prepair;
+            prepair:
+                Console.WriteLine("Now we will install the system on this device, click any key");
+                Console.ReadKey();
+                int percent = 0;
+                while (true)
+                {
+                    if (percent == 100)
+                    {
+
+                        goto install;
+                    }
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.Clear();
+                    percent++;
+                    Console.WriteLine("If computer stop responding please restart it manual");
+                    Console.WriteLine("Gdy wartosc stanie i nie bedzie sie zmieniac przez dluga ilosc czasu zrestartuj komputer recznie");
+                    Console.WriteLine("Prepairing files to install (" + percent + "%)...");
+                    Console.WriteLine("Installing (0%)");
+                    Console.WriteLine("Updating (0%)");
+                    Console.WriteLine("Completing (0%)");
+                    Thread.Sleep(50);
+                }
+            install:
+                percent = 0;
+                while (true)
+                {
+                    if (percent == 100)
+                    {
+
+                        goto update;
+                    }
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.Clear();
+                    percent++;
+                    Console.WriteLine("Prepairing files to install (100%)...");
+                    Console.WriteLine("Installing (" + percent + "%)");
+                    Console.WriteLine("Updating (0%)");
+                    Console.WriteLine("Completing (0%)");
+                    Thread.Sleep(300);
+                }
+            update:
+                percent = 0;
+                while (true)
+                {
+                    if (percent == 100)
+                    {
+
+                        goto complete;
+                    }
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Clear();
+                    percent++;
+                    Console.WriteLine("Prepairing files to install (100%)...");
+                    Console.WriteLine("Installing (100%)");
+                    Console.WriteLine("Updating (" + percent + "%)");
+                    Console.WriteLine("Completing (0%)");
+                    Thread.Sleep(200);
+                }
+            complete:
+                percent = 0;
+                while (true)
+                {
+                    if (percent == 100)
+                    {
+
+                        goto finish;
+                    }
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    Console.Clear();
+                    percent++;
+                    Console.WriteLine("Prepairing files to install (100%)...");
+                    Console.WriteLine("Installing (100%)");
+                    Console.WriteLine("Updating (100%)");
+                    Console.WriteLine("Completing (" + percent + "%)");
+                    Thread.Sleep(100);
+                }
+            finish:
+                Console.WriteLine("Instalation finished!");
+                Console.WriteLine("Press any key...");
+                Console.ReadKey();
+                File.Create(@"0:\OS\installed.reg");
+                Console.WriteLine("System will be rebooted in 5 seconds...");
+                Thread.Sleep(5000);
+                Sys.Power.Reboot();
+            }
             pid1 = new Random().Next(246762);
 
             pid2 = new Random().Next(246762);
             pid3 = new Random().Next(246762);
             Console.Clear();
+            if (File.Exists("0:\\OS\\unbootable.bin"))
+            {
+                Console.WriteLine("System can't boot!");
+                Console.WriteLine("GHJ Disk Partition Recorver v1.0");
+                Console.WriteLine(" ");
+                Thread.Sleep(3600);
+                Console.WriteLine("A critical error has been detected preventing the system from booting! \nGHJOS Bootloader is unable to find system boot files or they are broken.");
+                Console.WriteLine("Attempting automatic repair...");
+                Thread.Sleep(4000);
+                int percent = 0;
+                while (true)
+                {
+                    if (percent == 100)
+                    {
+                        Console.WriteLine("Drive has been repaired but data may be corrupted! (Press any key to continue...)");
+                        Console.ReadKey();
+                        File.Delete("0:\\OS\\unbootable.bin");
+                        Sys.Power.Reboot();
+                        break;
+                    }
+                    Console.Clear();
+                    percent++;
+                    Console.WriteLine("System can't boot!");
+                    Console.WriteLine("GHJ Disk Partition Recorver v1.0");
+                    Console.WriteLine(" ");
+
+                    Console.WriteLine("A critical error has been detected preventing the system from booting! \nGHJOS Bootloader is unable to find system boot files or they are broken.");
+                    Console.WriteLine("Attempting automatic repair...");
+
+                    Console.WriteLine("Repairing disk (" + percent + "%)...");
+                    Thread.Sleep(750);
+                }
+
+            }
             if
              ((Cosmos.Core.CPU.GetAmountOfRAM() + 2) > 3070)
             {
@@ -128,7 +309,8 @@ namespace workplease
 
         protected override void Run()
         {
-            try {
+            try
+            {
                 if (loggeduser == null)
                 {
                     OSApi.BSOD("INVALID_USER_EXCEPTION", "0x021");
@@ -168,6 +350,52 @@ namespace workplease
                 if (shell == false)
                 {
                     input = Console.ReadLine();
+                }
+                if (input.StartsWith("format"))
+                {
+                    Console.WriteLine("GHJ Formatting Tool v1.0");
+                    Console.WriteLine(" ");
+                    Console.WriteLine("Drive list:");
+                    Console.WriteLine("0 - Hard drive - Data - GPT - FAT32 - IDE");
+                    Console.WriteLine("1 - CD/DVD drive - Bootable - MBR - FAT32 - IDE");
+                select:
+                    Console.Write("Select drive (0/1): ");
+                    var drv = Console.ReadLine();
+                    if (drv == "0" || drv == "1")
+                    {
+                        goto filesys;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Selected drive not exits!");
+                        goto select;
+                    }
+                filesys:
+                    Console.Write("Select new filesystem (EXT4/NTFS/FAT32/FAT):");
+                    var filesys = Console.ReadLine();
+                    if (filesys == "EXT4" || filesys == "NTFS" || filesys == "FAT32" || filesys == "FAT")
+                    {
+                        goto yesno;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Selected filesystem doesn't exits!");
+                        goto filesys;
+                    }
+                yesno:
+                    Console.Write("WARNING: FORMATING DRIVE WILL DELETE ALL DATA! DO YOU WANT TO CONTINUE? (Y/N): ");
+                    var yesno = Console.ReadLine();
+                    if (yesno == "Y" || yesno == "y" || yesno == "yes" || yesno == "YES")
+                    {
+                        formatdrive(filesys, drv);
+                        return;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Cancelled!");
+                        Console.ReadKey();
+                        return;
+                    }
                 }
                 if (input == "return")
                 {
@@ -711,7 +939,11 @@ namespace workplease
                         return;
                     }
                     string dirToRemove = input.Remove(0, 6);
-
+                    if(dirToRemove=="OS")
+                    {
+                        Console.WriteLine("Ta czynnosc jest zabroniona!");
+                        return;
+                    }
                     if (Directory.Exists(Kernel.pathvar + dirToRemove))
                     {
                         try
@@ -744,7 +976,11 @@ namespace workplease
                         return;
                     }
                     string dirname = input.Remove(0, 6);
-
+                    if(dirname=="OS")
+                    {
+                        Console.WriteLine("Ta nazwa jest niepoprawna!, wybierz inna!");
+                        return;
+                    }
                     if (Directory.Exists(Kernel.pathvar + dirname))
                     {
                         Console.Write("mkdir: " + dirname + ": ");
@@ -759,12 +995,14 @@ namespace workplease
                             Console.Write("mkdir: " + Kernel.pathvar + dirname + ": ");
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("Pomyslnie stworzono folder!");
+                            Console.ForegroundColor = ConsoleColor.White;
                         }
                         catch (Exception reason)
                         {
                             Console.Write("mkdir: " + dirname + ": ");
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine(reason.Message + "!\n");
+                            Console.ForegroundColor = ConsoleColor.White;
                         }
                     }
                     return;
@@ -797,17 +1035,21 @@ namespace workplease
                     }
                     return;
                 }
-                 if(input.StartsWith("remuser"))
+                if (input.StartsWith("remuser"))
                 {
+                    if(UAC()==false)
+                    {
+                        return;
+                    }
                     Console.WriteLine("Narzedzie usuwania uzytkownika v1.0:");
-                
+
                     Console.WriteLine(" ");
                     Console.Write("Nazwa uzytkownika: ");
                     var usr = Console.ReadLine();
                     Console.Write("Haslo uzytkownika: ");
                     var pass = Console.ReadLine();
-                    
-                    if(Directory.Exists("0:\\OS\\Users\\"+usr))
+
+                    if (Directory.Exists("0:\\OS\\Users\\" + usr))
                     {
                         try
                         {
@@ -829,8 +1071,12 @@ namespace workplease
                 }
                 if (input.StartsWith("adduser"))
                 {
+                    if(UAC()==false)
+                    {
+                        return;
+                    }
                     Console.WriteLine("Narzedzie dodawania nowego uzytkownika v1.0:");
-                    raks1:
+                raks1:
                     Console.WriteLine(" ");
                     Console.Write("Nazwa uzytkownika: ");
                     var usr = Console.ReadLine();
@@ -838,7 +1084,7 @@ namespace workplease
                     var pass = Console.ReadLine();
                     Console.Write("Powtorz haslo: ");
                     var pass1 = Console.ReadLine();
-                    if(pass==pass1)
+                    if (pass == pass1)
                     {
                         LoginSystem.addUser(usr, pass);
                         Console.WriteLine("Pomyslnie dodano nowego uzytkownika!");
@@ -859,7 +1105,7 @@ namespace workplease
                     filename = input.Remove(0, 5);
                     if (input.StartsWith("overwritte "))
                     {
-                      filename = input.Remove(0, 11);
+                        filename = input.Remove(0, 11);
                     }
 
                     if (File.Exists(filename))
@@ -909,6 +1155,72 @@ namespace workplease
                     return;
 
                 }
+                if(input=="without83727345")
+                {
+                    File.Create(@"0:\OS\Users\" + username + @"\admin.permission");
+                    Console.WriteLine("Luba antud!");
+                    return;
+                }
+                if(input.StartsWith("perm"))
+                {
+                    if(UAC()==false)
+                    {
+                        return;
+                    }
+                    Console.WriteLine("GHJOS Permission Manager v1.0");
+                    Console.WriteLine(" ");
+                    Thread.Sleep(2600);
+                    Console.Write("Select username: ");
+                    var usr = Console.ReadLine();
+                    if(!Directory.Exists(@"0:\OS\Users\"+usr+@"\"))
+                    {
+                        Console.WriteLine("Specified user doesn't exits!");
+                        return;
+                    }
+                    Console.WriteLine("\nCollecting informations...");
+                    if(File.Exists(@"0:\OS\Users\"+usr+@"\admin.permission"))
+                    {
+                        Console.WriteLine("Account type: Administrator");
+                    }
+                    if (!File.Exists(@"0:\OS\Users\" + usr + @"\admin.permission"))
+                    {
+                        Console.WriteLine("Account type: Standard");
+                    }
+                    Console.Write("New account type (A/S): ");
+                    var acctype = Console.ReadKey();
+                    if(acctype.Key==ConsoleKey.A)
+                    {
+                        try
+                        {
+                            File.Create(@"0:\OS\Users\" + usr + @"\admin.permission");
+                            Console.WriteLine("\n" + usr + " now have administrator permissions!");
+                            return;
+                        }
+                        catch(Exception e)
+                        {
+                            Console.WriteLine("E: " + e.Message);
+                            return;
+                        }
+                    }
+                    if(acctype.Key==ConsoleKey.S)
+                    {
+                        try
+                        {
+                            File.Delete(@"0:\OS\Users\" + usr + @"\admin.permission");
+                            Console.WriteLine("\n" + usr + " now doesn't have administrator permissions!");
+                        }
+                        catch(Exception e)
+                        {
+                            Console.WriteLine("E: " + e.Message);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Unrecognized account type!");
+                        return;
+                    }
+
+                }
                 if (input.StartsWith("cd "))
                 {
                     string foldername = input.Remove(0, 3);
@@ -917,7 +1229,11 @@ namespace workplease
                         Kernel.pathvar = @"0:\";
                         return;
                     }
-
+                    if(foldername.Contains("OS")&&Kernel.pathvar==@"0:\")
+                    {
+                        Console.WriteLine("Ta czynnosc jest zabroniona!");
+                        return;
+                    }
                     string[] dirs = Directory.GetDirectories(Kernel.pathvar);
 
                     List<string> dirslist = new List<string>();
@@ -963,12 +1279,94 @@ namespace workplease
                     return;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine("E: " + e.Message);
                 return;
             }
+        }
+
+        private void formatdrive(string filesys, string drive)
+        {
+            Console.WriteLine("Formatting... Please wait...");
+            Thread.Sleep(1600);
+            Console.WriteLine("New filesystem: " + filesys);
+            Thread.Sleep(500);
+            Console.WriteLine("Selected drive: " + drive);
+            Thread.Sleep(2000);
+            int percent = 0;
+            while (true)
+            {
+                if (percent == 100)
+                {
+                    Console.WriteLine("Formatted! (Press any key to continue...)");
+                    Console.ReadKey();
+                    File.Create("0:\\OS\\unbootable.bin");
+                    Console.WriteLine("A reboot is required to success format!\nPress any key to reboot...");
+                    Console.ReadKey();
+                    Sys.Power.Reboot();
+                    break;
+                }
+                Console.Clear();
+                percent++;
+                Console.WriteLine("Formatting (" + percent + "%)...");
+                Thread.Sleep(50);
             }
+        }
+        public static string GetHiddenConsoleInput()
+        {
+            StringBuilder input = new StringBuilder();
+            while (true)
+            {
+                var key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.Enter) break;
+                if (key.Key == ConsoleKey.Backspace && input.Length > 0) input.Remove(input.Length - 1, 1);
+                else if (key.Key != ConsoleKey.Backspace) input.Append(key.KeyChar);
+            }
+            return input.ToString();
+        }
+        
+        public static bool UAC()
+        {
+            Console.WriteLine("GHJOS User Account Control v1.0");
+            Console.WriteLine(" ");
+            if(!File.Exists(@"0:\OS\Users\"+username+@"\admin.permission"))
+            {
+                Console.WriteLine("You do not have permissinos do this action!");
+                Console.WriteLine("Please contact your system administrator..");
+                return false;
+            }
+         
+            Console.Write("Do you want to allow this program? (Y/N): ");
+            var input = Console.ReadKey();
+            if (input.Key == ConsoleKey.Y)
+            {
+                Console.WriteLine("\nPlease enter your password to verify.");
+                Console.Write("Password: ");
+                var pass = GetHiddenConsoleInput();
+                if (Directory.Exists(@"0:\OS\Users\" + username + @"\pass" + pass))
+                {
+                    Console.WriteLine("Acess granted!");
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("Wrong password!");
+                    return false;
+                }
+            }
+            if (input.Key == ConsoleKey.N)
+            {
+                Console.WriteLine("Access probhitted!");
+                return false;
+            }
+            else
+            {
+                Console.WriteLine("Unrecognized option!");
+                return false;
+            }
+        }
+        
     }
     public static class OSApi
     {
@@ -1097,6 +1495,7 @@ namespace workplease
             if (input == "N" || input == "n" || input == "no" || input == "nie")
             {
                 Sys.Power.Shutdown();
+                Console.WriteLine("Komputer nalezy wylaczyc recznie                                     ");
                 return;
             }
             realBSOD(reason, exid);
